@@ -18,5 +18,9 @@ public class Campo {
 		this.linha = linha;
 		this.coluna = coluna;
 	}
+	
+	boolean adicionarVisinho(Campo visinho) {
+		
+	}
 
 }
