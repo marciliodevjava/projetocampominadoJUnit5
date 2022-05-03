@@ -35,7 +35,7 @@ public class Campo {
 			vizinhos.add(vizinho);
 			return true;
 		} else {
-			return false;s
+			return false;
 		}
 	}
 
