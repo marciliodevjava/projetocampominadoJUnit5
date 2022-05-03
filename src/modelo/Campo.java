@@ -40,27 +40,29 @@ public class Campo {
 			return false;
 		}
 	}
-	
+
 	void alternarMarcacao() {
-		if(!aberto) {
+		if (!aberto) {
 			marcado = !marcado;
 		}
 	}
-	
+
 	boolean abrir() {
-		if(!aberto && !marcado) {
+		if (!aberto && !marcado) {
 			aberto = true;
-			
-			if(minado) {
+
+			if (minado) {
 				throw new ExplosaoException();
 			}
-			if(viziancaSegura()) {
+			if (viziancaSegura()) {
 				vizinhos.forEach(v -> v.abrir());
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
-	
+
 	boolean viziancaSegura() {
 		return vizinhos.stream().noneMatch(v -> v.minado);
 	}
