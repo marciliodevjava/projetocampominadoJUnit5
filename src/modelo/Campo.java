@@ -43,7 +43,7 @@ public class Campo {
 
 	void alternarMarcacao() {
 		if (!this.aberto) {
-			this.marcado = !this.marcado;
+			this.marcado = abrir();
 		}
 	}
 
