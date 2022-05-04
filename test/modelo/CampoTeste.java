@@ -74,7 +74,7 @@ public class CampoTeste {
 	void testeAlternarMarcacaoDuasChamadas() {
 		campo.alternarMarcacao();
 		campo.alternarMarcacao();
-		assertFalse(campo.isMarcado());
+		assertFalse(campo.abrir());
 	}
 
 	@Test
