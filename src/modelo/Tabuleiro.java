@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class Tabuleiro {
+public class Tabuleiro{
 
 	private int linhas;
 	private int colunas;
@@ -21,6 +21,18 @@ public class Tabuleiro {
 		gerarCampos();
 		associarVizinhos();
 		sortearMinas();
+	}
+
+	public void abrir(int linha, int coluna) {
+		campos.stream().filter(c -> c.getLinha() == linha && c.getColuna() == coluna).findFirst()
+				.ifPresent(c -> c.abrir());
+		;
+	}
+
+	public void alterarMarcacao(int linha, int coluna) {
+		campos.parallelStream().filter(c -> c.getLinha() == linha && c.getColuna() == coluna).findFirst()
+				.ifPresent(c -> c.alternarMarcacao());
+		;
 	}
 
 	private void gerarCampos() {
@@ -69,7 +81,7 @@ public class Tabuleiro {
 				sb.append(" ");
 				i++;
 			}
-			sb.append("\n" );
+			sb.append("\n");
 		}
 		return sb.toString();
 	}
