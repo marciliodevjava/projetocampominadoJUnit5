@@ -44,21 +44,33 @@ public class Tabuleiro {
 		Predicate<Campo> minado = c -> c.isMinado();
 		do {
 			minasArmadas = this.campos.stream().filter(minado).count();
-			int aleatorio = (int) (Math.round(minasArmadas) * this.campos.size());
+			int aleatorio = (int) (Math.random() * this.campos.size());
 			this.campos.get(aleatorio).minar();
 		} while (minasArmadas < this.minas);
 	}
 
 	public boolean objetivoAlcancado() {
-		return campos.stream().allMatch(c -> c.objetivoAlcancado());
+		return this.campos.stream().allMatch(c -> c.objetivoAlcancado());
 	}
 
 	public void reiniciar() {
-		campos.stream().forEach(c -> c.reiniciar());
+		this.campos.stream().forEach(c -> c.reiniciar());
 		sortearMinas();
 	}
-	
+
 	public String toString() {
-		return "";
+		StringBuilder sb = new StringBuilder();
+
+		int i = 0;
+		for (int l = 0; l < this.linhas; l++) {
+			for (int c = 0; c < this.colunas; c++) {
+				sb.append(" ");
+				sb.append(campos.get(i));
+				sb.append(" ");
+				i++;
+			}
+			sb.append("\n" );
+		}
+		return sb.toString();
 	}
 }
