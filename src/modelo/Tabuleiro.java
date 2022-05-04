@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Tabuleiro {
 
@@ -24,21 +25,32 @@ public class Tabuleiro {
 
 	private void gerarCampos() {
 		for (int linha = 0; linha < this.linhas; linha++) {
-			for (int coluna = 0; coluna < colunas; coluna++) {
-				campos.add(new Campo(linha, coluna));
+			for (int coluna = 0; coluna < this.colunas; coluna++) {
+				this.campos.add(new Campo(linha, coluna));
 			}
 		}
 	}
 
 	private void associarVizinhos() {
-		for (Campo c1 : campos) {
-			for (Campo c2 : campos) {
+		for (Campo c1 : this.campos) {
+			for (Campo c2 : this.campos) {
 				c1.adicionarVisinho(c2);
 			}
 		}
 	}
 
 	private void sortearMinas() {
-
+		long minasArmadas = 0;
+		Predicate<Campo> minado = c -> c.isMinado();
+		do {
+			minasArmadas = this.campos.stream().filter(minado).count();
+			int aleatorio = (int) (Math.round(minasArmadas) * this.campos.size());
+			this.campos.get(aleatorio).minar();
+		} while (minasArmadas < this.minas);
 	}
+
+	public boolean objetivoAlcancado() {
+		return campos.stream().allMatch(c -> c.objetivoAlcancado());
+	}
+
 }
