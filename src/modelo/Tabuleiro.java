@@ -16,6 +16,29 @@ public class Tabuleiro {
 		this.linhas = linhas;
 		this.colunas = colunas;
 		this.minas = minas;
+
+		gerarCampos();
+		associarVizinhos();
+		sortearMinas();
 	}
 
+	private void gerarCampos() {
+		for (int linha = 0; linha < this.linhas; linha++) {
+			for (int coluna = 0; coluna < colunas; coluna++) {
+				campos.add(new Campo(linha, coluna));
+			}
+		}
+	}
+
+	private void associarVizinhos() {
+		for (Campo c1 : campos) {
+			for (Campo c2 : campos) {
+				c1.adicionarVisinho(c2);
+			}
+		}
+	}
+
+	private void sortearMinas() {
+
+	}
 }
